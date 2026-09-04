@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'pantalla_jordy.dart';
+import 'pantalla_emerson.dart';
+import 'page_transitions.dart';
 
 void main() {
   runApp(const DecoracionApp());
@@ -20,7 +23,7 @@ class DecoracionApp extends StatelessWidget {
           seedColor: const Color(0xFFD37A17),
         ),
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }
@@ -229,9 +232,6 @@ class _HomePageState extends State<HomePage> {
         crossAxisCount: 2,
         crossAxisSpacing: 14,
         mainAxisSpacing: 18,
-
-        // IMPORTANTE:
-        // Aumentamos la altura disponible para cada tarjeta.
         childAspectRatio: 0.66,
       ),
       itemBuilder: (context, index) {
@@ -244,90 +244,97 @@ class _HomePageState extends State<HomePage> {
     final product = products[index];
     final favorite = favorites.contains(index);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // IMAGEN
-        AspectRatio(
-          aspectRatio: 0.82,
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox.expand(
-                  child: Image.asset(
-                    product.image,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-
-              // BOTÓN FAVORITO
-              Positioned(
-                top: 8,
-                right: 8,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (favorite) {
-                        favorites.remove(index);
-                      } else {
-                        favorites.add(index);
-                      }
-                    });
-                  },
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.88),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      favorite ? Icons.favorite : Icons.favorite_border,
-                      size: 19,
-                      color: favorite
-                          ? const Color(0xFFD67B16)
-                          : const Color(0xFF8A8A86),
+    return GestureDetector(
+      onTap: () {
+        if (index == 0) {
+          Navigator.of(context).push(slideUpRoute(const PantallaEmerson()));
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // IMAGEN
+          AspectRatio(
+            aspectRatio: 0.82,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: SizedBox.expand(
+                    child: Image.asset(
+                      product.image,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-            ],
+
+                // BOTÓN FAVORITO
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (favorite) {
+                          favorites.remove(index);
+                        } else {
+                          favorites.add(index);
+                        }
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.88),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        favorite ? Icons.favorite : Icons.favorite_border,
+                        size: 19,
+                        color: favorite
+                            ? const Color(0xFFD67B16)
+                            : const Color(0xFF8A8A86),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
 
-        // ESPACIO ENTRE IMAGEN Y NOMBRE
-        const SizedBox(height: 7),
+          // ESPACIO ENTRE IMAGEN Y NOMBRE
+          const SizedBox(height: 7),
 
-        // NOMBRE
-        Text(
-          product.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontSize: 12.5,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF4D4744),
+          // NOMBRE
+          Text(
+            product.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF4D4744),
+            ),
           ),
-        ),
 
-        // ESPACIO ENTRE NOMBRE Y PRECIO
-        const SizedBox(height: 3),
+          // ESPACIO ENTRE NOMBRE Y PRECIO
+          const SizedBox(height: 3),
 
-        // PRECIO
-        Text(
-          product.price,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontSize: 12.5,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFF4C4642),
+          // PRECIO
+          Text(
+            product.price,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF4C4642),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

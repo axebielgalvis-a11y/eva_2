@@ -16,7 +16,9 @@ class PantallaEmerson extends StatelessWidget {
             color: Colors.black,
             size: 20,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
         title: const Text(
           'ARTESANÍA',
