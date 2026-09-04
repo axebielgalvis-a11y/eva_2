@@ -1,0 +1,24 @@
+name: decoracion_flutter
+description: UI de tienda de decoracion recreada con Flutter.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/jarron.jpg
+    - assets/images/cojin.jpg
+    - assets/images/lampara.jpg
+    - assets/images/espejo.jpg
