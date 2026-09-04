@@ -51,7 +51,7 @@ class PantallaEmerson extends StatelessWidget {
                   width: double.infinity,
                   color: const Color(0xFFF3EFE6),
                   child: Image.asset(
-                    'assets/jarron.png', // Espacio reservado para tu imagen
+                    'assets/jarron.png',
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => const Center(
                       child: Icon(Icons.image, size: 80, color: Colors.grey),
